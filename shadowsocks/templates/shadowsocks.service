@@ -1,0 +1,10 @@
+[Unit]
+Description=Shadowsocks Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/shadowsocks/server.py m
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

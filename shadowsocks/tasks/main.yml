@@ -1,0 +1,24 @@
+---
+- include: dependencies.yml
+  tags:
+    - install
+
+- include: libsodium.yml
+  tags:
+    - install
+
+- include: server.yml
+  tags:
+    - config
+
+- include: core.yml
+  tags:
+    - install
+
+- include: config.yml
+  tags: 
+    - config
+
+- include: fixes.yml
+  tags:
+    - fixes

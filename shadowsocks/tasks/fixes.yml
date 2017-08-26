@@ -1,0 +1,20 @@
+---
+- name: fix SSLError - install depoendencies
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - libssl-dev
+    - python-dev
+    - libffi-dev
+  when: ansible_os_family == "Debian"
+
+- name: fix SSLError - update requests
+  command: pip install --upgrade requests
+  when: ansible_os_family == "Debian"
+
+- name: fix SSLError - install security
+  command: pip install requests[security]
+  when: ansible_os_family == "Debian"

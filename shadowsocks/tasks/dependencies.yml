@@ -1,0 +1,37 @@
+---
+- name: install redhat dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - epel-release
+    - gcc
+    - gcc-c++
+    - automake
+    - autoconf
+    - make
+    - git
+    - wget
+    - python-setuptools
+  when: ansible_os_family == "RedHat"
+
+- name: install debian like dependencies
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - build-essential
+    - python-setuptools
+    - git 
+    - wget 
+  when: ansible_os_family == "Debian"
+
+- name: install pip
+  command: easy_install pip
+  args:
+    creates: /usr/bin/pip
+
+- name: install cymysql
+  command: pip install cymysql

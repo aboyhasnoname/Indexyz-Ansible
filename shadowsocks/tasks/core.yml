@@ -1,0 +1,12 @@
+---
+- name: clone shadowsocks repo
+  git:
+    repo: https://github.com/glzjin/shadowsocks.git
+    dest: /usr/local/shadowsocks
+    version: manyuser
+
+- name: add runable promise to server python file
+  file:
+    path: /usr/local/shadowsocks/server.py
+    mode: 777
+    

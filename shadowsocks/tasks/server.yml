@@ -1,0 +1,32 @@
+---
+- name: create shadowsocks init script
+  template: 
+    src: "{{ item }}"
+    dest: /etc/init.d/shadowsocks
+    mode: 0755
+  with_first_found:
+    - files:
+      - "shadowsocks.init"
+      paths:
+        - ../templates
+  when: ansible_service_mgr|default() != "systemd"
+
+- name: create shadowsocks systemd service
+  template: 
+    src: "{{ item }}"
+    dest: /etc/systemd/system/shadowsocks.service
+    mode: 0755
+  with_first_found:
+    - files:
+      - "shadowsocks.service"
+      paths:
+        - ../templates
+  register: shadowsocks_unit_file
+  when: ansible_service_mgr|default() == "systemd"
+
+- name: reload systemd daemon
+  command: systemctl daemon-reload
+  when:
+    - ansible_service_mgr|default() == "systemd"
+    - shadowsocks_unit_file|changed
+

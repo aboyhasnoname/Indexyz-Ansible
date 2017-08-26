@@ -1,0 +1,37 @@
+---
+
+- name: download libsodium
+  get_url:
+    url: "https://github.com/jedisct1/libsodium/releases/download/{{ libsodium_version }}/libsodium-{{ libsodium_version }}.tar.gz"
+    dest: /usr/local/src/{{ libsodium_version }}.tar.gz
+
+- name: extract libsodium
+  unarchive:
+    src: /usr/local/src/{{ libsodium_version }}.tar.gz
+    dest: /usr/local/src
+    creates: /usr/local/src/libsodium-{{ libsodium_version }}/Makefile
+    copy: no
+
+- name: config libsodium
+  command: ./configure
+  args:
+    chdir: /usr/local/src/libsodium-{{ libsodium_version }}
+    creates: /usr/local/src/libsodium-{{ libsodium_version }}/Makefile
+
+- name: compile libsodium
+  command: make -j{{ ansible_processor_cores + 1 }}
+  args:
+    chdir: /usr/local/src/libsodium-{{ libsodium_version }}
+    creates: /usr/local/src/libsodium-{{ libsodium_version }}/src/libsodium/.libs/libsodium.so
+
+- name: install libsodium
+  command: make install
+  args:
+    chdir: /usr/local/src/libsodium-{{ libsodium_version }}
+    creates: /usr/local/lib/libsodium.so
+
+- name: update ld.so.conf.d
+  command: echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
+
+- name: run ldconfig to update config
+  command: ldconfig

@@ -1,0 +1,11 @@
+---
+- name: create shadowsocks init script
+  template: 
+    src: "{{ item }}"
+    dest: /usr/local/shadowsocks/userapiconfig.py
+    mode: 0755
+  with_first_found:
+    - files:
+      - "config.py.j4"
+      paths:
+        - ../templates

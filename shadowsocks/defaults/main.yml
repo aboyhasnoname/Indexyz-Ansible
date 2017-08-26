@@ -1,0 +1,20 @@
+---
+# install options
+
+## libsodium
+libsodium_version: 1.0.13
+
+## shadowsocks
+
+auth_method: 'glzjinmod'
+
+webapi_url: 'https://your_domain'
+webapi_token: 'your_key'
+
+db_host: database_host
+db_port: 3306
+db_user: root
+db_pass: password
+db_db: shadowsocks
+
+node_id: 1
