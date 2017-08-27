@@ -1,0 +1,13 @@
+---
+- name: add require package in centos
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+  when: ansible_os_family == "RedHat"
+
+- name: add docker repo to yum
+  command: yum-config-manager --enable docker-ce-edge
