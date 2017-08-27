@@ -1,6 +1,6 @@
 ---
 - name: run ocserv in docker
-  docker:
+  docker_container:
     name: ocserv-docker
     image: indexyz/ocserv-docker:develop
     state: started
@@ -15,4 +15,4 @@
       - "/ocserv:/etc/ocserv"
       - "/certs:/certs"
     privileged : yes
-    restart: always
+    restart_policy: always
