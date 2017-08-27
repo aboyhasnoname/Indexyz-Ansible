@@ -26,12 +26,53 @@
     - software-properties-common
   when: ansible_distribution == "Ubuntu"
 
-- name: add docker gpg key
+- name: add require package in debian
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+  when: ansible_distribution == "Debian"
+
+- name: add debian 7 require
+  apt: 
+    name: "python-software-properties"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  when: ansible_distribution == "Debian" and ansible_distribution_version == "7"
+
+- name: add debian > 7 require
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - gnupg2 
+    - software-properties-common
+  when: ansible_distribution == "Debian" and ansible_distribution_version|int >= 8
+
+- name: add docker gpg key of debian
+  shell: |
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+  when: ansible_distribution == "Debian"
+
+- name: add docker repo of debian 
+  shell: |
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+  when: ansible_distribution == "Debian"
+
+- name: add docker gpg key of ubuntu
   shell: |
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   when: ansible_distribution == "Ubuntu"
 
-- name: add apt docker repo
+- name: add apt docker repo of ubuntu
   shell: |
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   when: ansible_distribution == "Ubuntu"
