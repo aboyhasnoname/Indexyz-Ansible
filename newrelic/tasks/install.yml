@@ -1,0 +1,17 @@
+---
+- name: import repository
+  yum:
+    name: https://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: install sysmond
+  yum:
+    name: "newrelic-sysmond"
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: config sysmond
+  command: nrsysmond-config --set license_key={{ license_key }}
+  notify:
+    start and enable relic service

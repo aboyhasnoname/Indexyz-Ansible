@@ -1,0 +1,6 @@
+---
+- name: start and enable relic service
+  service:
+    name: newrelic-sysmond
+    state: started
+    enabled: yes
