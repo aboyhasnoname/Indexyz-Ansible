@@ -5,7 +5,7 @@
     image: indexyz/ocserv-docker:develop
     state: started
     ports:
-      - "{{ public_port }}:443/tcp"
+      - "{{ public_port }}:443"
       - "{{ public_port }}:443/udp"
     env:
       ENABLE_RADIUS: True

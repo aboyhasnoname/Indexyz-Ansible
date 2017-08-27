@@ -7,6 +7,7 @@
     - yum-utils
     - device-mapper-persistent-data
     - lvm2
+    - python-pip
   when: ansible_os_family == "RedHat"
 
 - name: add docker repo to yum
@@ -24,6 +25,7 @@
     - ca-certificates 
     - curl 
     - software-properties-common
+    - python-pip
   when: ansible_distribution == "Ubuntu"
 
 - name: add require package in debian
@@ -36,6 +38,7 @@
     - apt-transport-https
     - ca-certificates
     - curl
+    - python-pip
   when: ansible_distribution == "Debian"
 
 - name: add debian 7 require
