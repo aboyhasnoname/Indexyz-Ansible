@@ -10,4 +10,5 @@
   when: ansible_os_family == "RedHat"
 
 - name: add docker repo to yum
-  command: yum-config-manager --enable docker-ce-edge
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  when: ansible_os_family == "RedHat"

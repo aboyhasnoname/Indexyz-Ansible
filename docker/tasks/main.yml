@@ -1,5 +1,6 @@
 ---
-- includs: dependencies.yml
+
+- include: dependencies.yml
   tags:
     - install
 

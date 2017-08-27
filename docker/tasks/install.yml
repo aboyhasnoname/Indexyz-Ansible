@@ -5,3 +5,5 @@
   with_items:
     - docker-ce
   when: ansible_os_family == "RedHat"
+  notify:
+    enable and start docker
