@@ -1,0 +1,13 @@
+---
+
+- name: create config directory
+  file:
+    path: /ocserv
+    state: directory
+    mode: 0755
+
+- name: upload config
+  copy:
+    src: ../files/ocserv.conf
+    dest: /ocserv/ocserv.conf
+    mode: 0755

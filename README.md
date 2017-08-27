@@ -5,3 +5,4 @@ Using Ansible to automation operation in my server
 - shadowsocks (manyuser)
 - docker
 - new relic
+- ocserv (base on docker)

@@ -1,0 +1,21 @@
+---
+
+- name: create cert path
+  file:
+    path: /certs
+    state: directory
+    mode: 0755
+
+- name: upload ca
+  copy:
+    src: ../files/fullchain.pem
+    dest: /certs/fullchain.pem
+    mode: 0755
+
+- name: upload key
+  copy:
+    src: ../files/private.pem
+    dest: /certs/private.pem
+    mode: 0755
+
+    

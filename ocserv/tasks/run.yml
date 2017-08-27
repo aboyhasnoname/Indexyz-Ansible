@@ -1,0 +1,18 @@
+---
+- name: run ocserv in docker
+  docker:
+    name: ocserv-docker
+    image: indexyz/ocserv-docker:develop
+    state: started
+    ports:
+      - "{{ public_port }}:443/tcp"
+      - "{{ public_port }}:443/udp"
+    env:
+      ENABLE_RADIUS: True
+      RADIUS_SERVER: "{{ radius_server }}"
+      RADIUS_SECRET: "{{ radius_screct }}"
+    volumes: 
+      - "/ocserv:/etc/ocserv"
+      - "/certs:/certs"
+    privileged : yes
+    restart: always

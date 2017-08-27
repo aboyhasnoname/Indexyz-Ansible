@@ -1,0 +1,12 @@
+---
+- include: cert.yml
+  tags:
+    - config
+
+- include: config.yml
+  tags:
+    - config
+
+- include: run.yml
+  tags:
+    - install

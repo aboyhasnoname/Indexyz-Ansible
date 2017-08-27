@@ -1,0 +1,7 @@
+# ocserv settings
+
+public_port: 443
+
+radius_server: 127.0.0.1
+radius_screct: Test123
+
