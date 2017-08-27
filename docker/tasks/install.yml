@@ -7,3 +7,14 @@
   when: ansible_os_family == "RedHat"
   notify:
     enable and start docker
+
+- name: install docker-ce
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+    - docker-ce
+  when: ansible_os_family == "Debian"
+  notify:
+    enable and start docker

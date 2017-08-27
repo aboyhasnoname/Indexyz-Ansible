@@ -1,16 +1,17 @@
 ---
 galaxy_info:
   author: Indeyxz
-  description: Quick Way to setup VPN Server
+  description: Quick setup docker
   min_ansible_version: 0.0.0
   license: MIT
   platforms:
     - name: EL
       versions:
         - 7
+    - name: Ubuntu
+      versions: any
   categories:
-    - shadowsocks
-    - vpn
+    - docker
 
 dependencies: []
 
