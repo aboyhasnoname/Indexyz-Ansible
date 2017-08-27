@@ -11,6 +11,23 @@
     state: present
   when: ansible_os_family == "RedHat"
 
+- name: import sysmond repo to debian like system
+  shell: |
+    echo deb http://apt.newrelic.com/debian/ newrelic non-free > /etc/apt/sources.list.d/newrelic.list
+  when: ansible_os_family == "Debian"
+
+- name: import sysmond gpg key
+  shell: |
+    wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+  when: ansible_os_family == "Debian"
+
+- name: install sysmond pacakge use apt
+  apt:
+    name: "newrelic-sysmond"
+    update_cache: yes
+    state: present
+  when: ansible_os_family == "Debian"
+
 - name: config sysmond
   command: nrsysmond-config --set license_key={{ license_key }}
   notify:
