@@ -1,0 +1,6 @@
+---
+- name: start shadowsocks service
+  service:
+    name: shadowsocks
+    state: started
+    enabled: yes

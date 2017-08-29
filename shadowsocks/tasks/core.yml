@@ -4,6 +4,8 @@
     repo: https://github.com/glzjin/shadowsocks.git
     dest: /usr/local/shadowsocks
     version: manyuser
+  notify:
+    start shadowsocks service
 
 - name: add runable promise to server python file
   file:

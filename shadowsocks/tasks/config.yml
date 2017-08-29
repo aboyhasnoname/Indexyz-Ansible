@@ -9,3 +9,5 @@
       - "config.py.j4"
       paths:
         - ../templates
+  notify:
+    start shadowsocks service
