@@ -1,0 +1,9 @@
+---
+
+- include: dependencies.yml
+  tags:
+    - install
+
+- include: install.yml
+  tags:
+    - install

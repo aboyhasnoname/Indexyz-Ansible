@@ -1,0 +1,25 @@
+---
+
+- name: download source code
+  get_url:
+    url: https://www.kernel.org/pub/software/scm/git/git-{{ git_version }}.tar.gz
+    dest: /usr/local/src/git-{{ git_version }}.tar.gz
+
+- name: unarchive source code
+  unarchive: 
+    src: /usr/local/src/git-{{ git_version }}.tar.gz
+    dest: /usr/local/src
+    creates: /usr/local/src/git-{{ git_version }}/Makefile
+    copy: no
+
+- name: config git
+  command: ./configure
+  args:
+    chdir: /usr/local/src/git-{{ git_version }}
+    creates: /usr/local/src/git-{{ git_version }}/Makefile
+
+- name: compile and install git
+  command: make prefix=/usr install
+  args:
+    chdir: /usr/local/src/git-{{ git_version }}
+    creates: /usr/bin/git
