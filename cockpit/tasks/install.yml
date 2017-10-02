@@ -1,0 +1,47 @@
+---
+- name: Init RHEL extra repo
+  shell: |
+    subscription-manager repos --enable rhel-7-server-extras-rpms
+  when: ansible_distribution == "RedHat"
+
+
+- name: install cockpit
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - cockpit
+    - cockpit-docker
+  when: ansible_os_family == "RedHat"
+  notify:
+    enable and start cookipt
+
+- name: add cockpit ppa repo to ubuntu
+  apt_repository:
+    repo: 'ppa:cockpit-project/cockpit'
+  when: ansible_distribution == "Ubuntu"
+
+- name: add debian 8 repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian jessie-backports-sloppy main
+    state: present
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "8"
+
+- name: add debian 9 repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian stretch-backports main
+    state: present
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "9"
+
+- name: install cockpit in debian
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 86400
+    state: present
+  with_items:
+    - cockpit
+    - cockpit-docker
+  when: ansible_os_family == "Debian"
+  notify:
+    enable and start cookipt

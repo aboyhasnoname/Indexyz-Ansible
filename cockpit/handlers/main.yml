@@ -1,0 +1,6 @@
+---
+- name: enable and start cookipt
+  service:
+    name: cockpit
+    state: started
+    enabled: yes
