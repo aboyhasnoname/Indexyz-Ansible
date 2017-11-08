@@ -13,6 +13,7 @@
     - git
     - wget
     - python-setuptools
+    - libselinux-python
   when: ansible_os_family == "RedHat"
 
 - name: install debian like dependencies
