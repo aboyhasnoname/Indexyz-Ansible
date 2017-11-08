@@ -31,7 +31,8 @@
     creates: /usr/local/lib/libsodium.so
 
 - name: update ld.so.conf.d
-  command: echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
+  shell: |
+    echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 
 - name: run ldconfig to update config
   command: ldconfig
