@@ -29,6 +29,17 @@
     - wget 
   when: ansible_os_family == "Debian"
 
+- name: install Arch Linux dependencies
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - python2
+    - python2-setuptools
+    - git
+    - libsodium
+    - wget
+
 - name: install pip
   command: easy_install pip
   args:
