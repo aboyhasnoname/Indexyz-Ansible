@@ -22,3 +22,4 @@
 - name: fix system default python is Python2 - arch linux
   shell: |
     sed -i 's#/usr/bin/python#/usr/bin/python2#g' /usr/local/shadowsocks/server.py
+  when: ansible_distribution == "Archlinux"
