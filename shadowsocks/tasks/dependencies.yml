@@ -39,7 +39,7 @@
     - git
     - libsodium
     - wget
-  when: ansible_os_family == "Archlinux"
+  when: ansible_distribution == "Archlinux"
 
 - name: install pip
   command: easy_install pip
