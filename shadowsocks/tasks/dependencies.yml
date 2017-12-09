@@ -48,4 +48,4 @@
   when: ansible_distribution != "Archlinux"
 
 - name: install cymysql
-  command: pip2 install cymysql
+  command: pip2 install cymysql requests
