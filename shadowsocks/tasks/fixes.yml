@@ -18,7 +18,12 @@
 - name: fix SSLError - install security
   command: pip install requests[security]
   when: ansible_os_family == "Debian"
-  
+
+- name: fix Debian like system sshd error - add sshd ALL connection to whitelist
+  shell: |
+    echo "sshd: ALL" > /etc/hosts.allow
+  when: ansible_os_family == "Debian"
+
 - name: fix system default python is Python2 - arch linux
   shell: |
     sed -i 's#/usr/bin/python#/usr/bin/python2#g' /usr/local/shadowsocks/server.py
