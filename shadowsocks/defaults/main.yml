@@ -2,7 +2,7 @@
 # install options
 
 ## libsodium
-libsodium_version: 1.0.13
+libsodium_version: 1.0.18
 
 ## shadowsocks
 
